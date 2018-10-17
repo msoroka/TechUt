@@ -8,7 +8,12 @@ public class Plane {
     private Date produceDate;
     private double combustion;
 
-    public Plane() {}
+    public Plane(String producer, int capacity, Date produceDate, double combustion) {
+        this.producer = producer;
+        this.capacity = capacity;
+        this.produceDate = produceDate;
+        this.combustion = combustion;
+    }
 
     public String getProducer() {
         return producer;
