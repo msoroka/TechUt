@@ -1,5 +1,7 @@
 package pl.msoroka.zad02.service;
 
+import pl.msoroka.zad02.domain.Plane;
+
 import java.sql.*;
 
 public class PlaneService {
@@ -23,36 +25,32 @@ public class PlaneService {
         }
 
         if (tableExists) {
-            System.out.println("Table exists");
+            // Table exsits
         } else {
-            System.out.println("Table created");
+            // Table doesn't exist
             statement.executeUpdate(CREATE_TABLE_SQL);
         }
     }
 
-    protected void addPlane(String producer, int capacity, Date produceDate, double combustion) throws SQLException{
-        String addPlane = "INSERT INTO Plane(producer, capacity, produceDate, combustion) VALUES('Boeing', 150, '2018-01-01', 125.5)";
-
-        String addPlane = "INSERT INTO Plane(producer, capacity, produceDate, combustion) VALUES(" + producer + ", " + capacity + ", " + produceDate + ", " + combustion + ")";
+    public void addPlane(Plane plane) throws SQLException{
+        String addPlane = "INSERT INTO Plane(producer, capacity, produceDate, combustion) VALUES('" + plane.getProducer() + "', '" + plane.getCapacity() + "', '" + plane.getProduceDate() + "', '" + plane.getCombustion() + "')";
 
         statement.executeUpdate(addPlane);
     }
 
-    protected void showAllPlanes() throws SQLException {
+    public void showAllPlanes() throws SQLException {
         String allPlanes = "SELECT * FROM Plane";
 
         ResultSet rs = statement.executeQuery(allPlanes);
 
         while(rs.next()) {
-            System.out.println(rs.getString("producer") + " " + rs.getDate("produceDate"));
+            System.out.println("Producer: " + rs.getString("producer") + "\nProduction date: " + rs.getDate("produceDate") + "\nCapacity: " + rs.getInt("capacity") + "\nAverage combustion: " + rs.getDouble("combustion") + "\n");
         }
     }
 
-    public static void main(String[] args) throws SQLException {
-        PlaneService ps = new PlaneService();
+    public void removePlanes() throws SQLException {
+        String removePlanes = "DELETE FROM Plane";
 
-        ps.addPlane("Boeing", 250, new Date(2018, 01, 01), 135.5);
-
-        ps.showAllPlanes();
+        statement.executeQuery(removePlanes);
     }
 }
