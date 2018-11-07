@@ -63,7 +63,7 @@ public class PlaneService {
         }
     }
 
-    public void searchPlaneByName(String producer) throws SQLException{
+    public void searchPlaneByName(String producer) throws SQLException {
         searchPlaneByNamePStmt.setString(1, producer);
 
         ResultSet rs = searchPlaneByNamePStmt.executeQuery();
@@ -72,13 +72,13 @@ public class PlaneService {
         }
     }
 
-    public void updatePlane(String producer, int capacity, Date produceDate, double combustion) throws SQLException{
+    public void updatePlane(String producer, int capacity, Date produceDate, double combustion) throws SQLException {
         updatePlanePStmt = connection.prepareStatement("UPDATE Plane SET producer=?, capacity=?, produceDate=?, combustion=? WHERE producer=?");
         searchPlaneByNamePStmt.setString(1, producer);
 
         ResultSet rs = searchPlaneByNamePStmt.executeQuery();
 
-        if(rs.next() == false) {
+        if (rs.next() == false) {
             System.out.println("Nie znaleziono samolotu do edycji");
         } else {
             updatePlanePStmt.setString(1, producer);
@@ -119,6 +119,7 @@ public class PlaneService {
 
             return true;
         } catch (SQLException e) {
+            System.out.println("Rollback");
             try {
                 connection.rollback();
             } catch (SQLException e1) {

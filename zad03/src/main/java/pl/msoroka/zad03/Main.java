@@ -61,10 +61,10 @@ public class Main {
 
         List<Plane> planes2 = new ArrayList<>();
 
-        Plane plane51 = new Plane("Cessna", 375, new Date(118, 05, 30), 135.5);
-        Plane plane61 = new Plane("Airbus", 375, new Date(118, 05, 30), 135.5);
-        planes.add(plane51);
-        planes.add(plane61);
+        Plane plane8 = new Plane("Cessna", 375, new Date(118, 05, 30), 135.5);
+        Plane plane9 = new Plane("Airbus", 375, new Date(118, 05, 30), 135.5);
+        planes2.add(plane8);
+        planes2.add(plane9);
         ps.addPlanes(planes2);
 
         ps.showAllPlanes();
