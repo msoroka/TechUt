@@ -3,6 +3,7 @@ package pl.msoroka.zad02.service;
 import pl.msoroka.zad02.domain.Plane;
 
 import java.sql.*;
+import java.util.List;
 
 public class PlaneService {
     private final String URL = "jdbc:hsqldb:hsql://localhost/workdb";
@@ -57,5 +58,27 @@ public class PlaneService {
 
     public void removePlanes() throws SQLException {
         deletePersonsPStmt.executeUpdate();
+    }
+
+    public boolean addAllPlanes(List<Plane> planes) {
+
+        try {
+            connection.setAutoCommit(false);
+
+            for (Plane plane : planes) {
+                addPlane(plane);
+            }
+
+            connection.commit();
+
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        }
+
+        return true;
     }
 }
