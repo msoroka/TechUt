@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.Date;
 import java.util.List;
 
-public class PlaneService {
+public class PlaneService implements PlaneManager{
     private final String URL = "jdbc:hsqldb:hsql://localhost/workdb";
     private final Connection connection;
     private final Statement statement;
