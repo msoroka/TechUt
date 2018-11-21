@@ -31,6 +31,7 @@ public class Person {
 	private Date registrationDate = new Date();
 
 	private List<Car> cars = new ArrayList<Car>();
+	private List<Dog> dogs = new ArrayList<Dog>();
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
