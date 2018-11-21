@@ -1,6 +1,8 @@
 package pl.msoroka.zad04.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Plane {
@@ -10,10 +12,17 @@ public class Plane {
     private String produceDate;
     private int yop;
 
-    public Plane(String name, String produceDate, int yop) {
+    private Producer producer;
+    private License license;
+    private List<Pilot> pilots = new ArrayList<Pilot>();
+
+    public Plane(String name, String produceDate, int yop, Producer producer, License license, List<Pilot> pilots) {
         this.name = name;
         this.produceDate = produceDate;
         this.yop = yop;
+        this.producer = producer;
+        this.license = license;
+        this.pilots = pilots;
     }
 
     public Plane() {
@@ -51,5 +60,32 @@ public class Plane {
 
     public void setYop(int yop) {
         this.yop = yop;
+    }
+
+    @ManyToOne
+    public Producer getProducer() {
+        return producer;
+    }
+
+    public void setProducer(Producer producer) {
+        this.producer = producer;
+    }
+
+    @OneToOne
+    public License getLicense() {
+        return license;
+    }
+
+    public void setLicense(License license) {
+        this.license = license;
+    }
+
+    @ManyToMany
+    public List<Pilot> getPilots() {
+        return pilots;
+    }
+
+    public void setPilots(List<Pilot> pilots) {
+        this.pilots = pilots;
     }
 }
