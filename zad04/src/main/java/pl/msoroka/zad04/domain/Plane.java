@@ -80,7 +80,8 @@ public class Plane {
         this.license = license;
     }
 
-    @ManyToMany
+
+    @OneToMany
     public List<Pilot> getPilots() {
         return pilots;
     }
@@ -88,4 +89,13 @@ public class Plane {
     public void setPilots(List<Pilot> pilots) {
         this.pilots = pilots;
     }
+
+//    @ManyToMany
+//    public List<Pilot> getPilots() {
+//        return pilots;
+//    }
+//
+//    public void setPilots(List<Pilot> pilots) {
+//        this.pilots = pilots;
+//    }
 }
