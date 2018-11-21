@@ -62,15 +62,7 @@ public class Plane {
         this.yop = yop;
     }
 
-    @ManyToOne
-    public Producer getProducer() {
-        return producer;
-    }
-
-    public void setProducer(Producer producer) {
-        this.producer = producer;
-    }
-
+    //Plane has unique license, license has unique plane
     @OneToOne
     public License getLicense() {
         return license;
@@ -80,7 +72,17 @@ public class Plane {
         this.license = license;
     }
 
+    //Producer has many planes
+    @ManyToOne
+    public Producer getProducer() {
+        return producer;
+    }
 
+    public void setProducer(Producer producer) {
+        this.producer = producer;
+    }
+
+    //Plane has many pilots
     @OneToMany
     public List<Pilot> getPilots() {
         return pilots;
@@ -90,6 +92,7 @@ public class Plane {
         this.pilots = pilots;
     }
 
+//    //Alternative for OneToMany relation with pilots
 //    @ManyToMany
 //    public List<Pilot> getPilots() {
 //        return pilots;
