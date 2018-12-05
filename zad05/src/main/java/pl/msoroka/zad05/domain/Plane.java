@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "plane.all", query = "Select p from Plane p"),
+})
 public class Plane {
 
     private long id;
