@@ -3,7 +3,10 @@ package com.example.shdemo.domain;
 import javax.persistence.*;
 
 @Entity
-public class Dog {
+@NamedQueries({
+        @NamedQuery(name = "dog.all", query = "Select d from Dog d"),
+        @NamedQuery(name = "dog.byName", query = "Select d from Dog d where d.name = :dogname")
+})public class Dog {
 
     private long id;
     private String name;
@@ -45,12 +48,12 @@ public class Dog {
         this.yob = yob;
     }
 
-    @ManyToOne
-    public Person getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Person owner) {
-        this.owner = owner;
-    }
+//    @ManyToOne
+//    public Person getOwner() {
+//        return owner;
+//    }
+//
+//    public void setOwner(Person owner) {
+//        this.owner = owner;
+//    }
 }
