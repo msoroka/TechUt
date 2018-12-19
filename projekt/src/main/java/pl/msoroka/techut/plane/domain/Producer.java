@@ -10,10 +10,10 @@ import java.util.Date;
 public class Producer {
 
     private long id;
-    private String model;
+    private String name;
 
     public Producer(String model) {
-        this.model = model;
+        this.name = model;
     }
 
     @Id
@@ -26,11 +26,11 @@ public class Producer {
         this.id = id;
     }
 
-    public String getModel() {
-        return model;
+    public String getName() {
+        return name;
     }
 
-    public void setModel(String model) {
-        this.model = model;
+    public void setName(String name) {
+        this.name = name;
     }
 }
