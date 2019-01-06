@@ -22,6 +22,9 @@ public class Plane {
         this.produceDate = produceDate;
     }
 
+    public Plane() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public long getId() {

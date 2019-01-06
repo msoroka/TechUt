@@ -24,4 +24,8 @@ public interface AirlinesManager {
     Producer findProducerById(long id);
     List<Producer> getAllProducers();
 
+    //Relations
+    List<Plane> getProducedPlanes(Producer producer);
+    void producePlane(long producerId, long planeId);
+
 }

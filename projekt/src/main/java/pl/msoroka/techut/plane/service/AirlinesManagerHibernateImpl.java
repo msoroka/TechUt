@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.msoroka.techut.plane.domain.Plane;
 import pl.msoroka.techut.plane.domain.Producer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -92,5 +93,22 @@ public class AirlinesManagerHibernateImpl implements AirlinesManager {
     @Override
     public List<Producer> getAllProducers() {
         return hsf.getCurrentSession().getNamedQuery("producer.all").list();
+    }
+
+    @Override
+    public List<Plane> getProducedPlanes(Producer producer){
+        producer = (Producer) hsf.getCurrentSession().get(Producer.class, producer.getId());
+
+        List<Plane> planes = new ArrayList<Plane>(producer.getPlanes());
+
+        return planes;
+    }
+
+    @Override
+    public void producePlane(long producerId, long planeId){
+        Producer producer = findProducerById(producerId);
+        Plane plane = findPlaneById(planeId);
+
+        producer.getPlanes().add(plane);
     }
 }

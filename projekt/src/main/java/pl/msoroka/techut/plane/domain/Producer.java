@@ -1,7 +1,9 @@
 package pl.msoroka.techut.plane.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @NamedQueries({
@@ -12,8 +14,13 @@ public class Producer {
     private long id;
     private String name;
 
-    public Producer(String model) {
-        this.name = model;
+    private List<Plane> planes = new ArrayList<Plane>();
+
+    public Producer(String name) {
+        this.name = name;
+    }
+
+    public Producer() {
     }
 
     @Id
@@ -32,5 +39,14 @@ public class Producer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    public List<Plane> getPlanes() {
+        return planes;
+    }
+
+    public void setPlanes(List<Plane> planes) {
+        this.planes = planes;
     }
 }
