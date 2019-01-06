@@ -1,7 +1,9 @@
 package pl.msoroka.techut.plane.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @NamedQueries({
@@ -14,6 +16,8 @@ public class Plane {
     private String sideNumber;
     private int capacity;
     private Date produceDate;
+
+    private List<Pilot> pilots = new ArrayList<Pilot>();
 
     public Plane(String model, String sideNumber, int capacity, Date produceDate) {
         this.model = model;
@@ -69,4 +73,12 @@ public class Plane {
         this.produceDate = produceDate;
     }
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    public List<Pilot> getPilots() {
+        return pilots;
+    }
+
+    public void setPilots(List<Pilot> pilots) {
+        this.pilots = pilots;
+    }
 }

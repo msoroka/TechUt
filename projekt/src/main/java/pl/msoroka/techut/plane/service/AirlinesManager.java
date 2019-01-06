@@ -1,5 +1,7 @@
 package pl.msoroka.techut.plane.service;
 
+import pl.msoroka.techut.plane.domain.License;
+import pl.msoroka.techut.plane.domain.Pilot;
 import pl.msoroka.techut.plane.domain.Plane;
 import pl.msoroka.techut.plane.domain.Producer;
 
@@ -24,8 +26,15 @@ public interface AirlinesManager {
     Producer findProducerById(long id);
     List<Producer> getAllProducers();
 
+    //Pilot
+    void addPilot(Pilot pilot);
+
+    //License
+    void addLicense(License license);
+
     //Relations
     List<Plane> getProducedPlanes(Producer producer);
     void producePlane(long producerId, long planeId);
+    void assignLicense(long licenseId, long pilotId);
 
 }

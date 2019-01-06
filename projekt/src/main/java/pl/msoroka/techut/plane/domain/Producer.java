@@ -41,7 +41,7 @@ public class Producer {
         this.name = name;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     public List<Plane> getPlanes() {
         return planes;
     }

@@ -5,6 +5,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import pl.msoroka.techut.plane.domain.License;
+import pl.msoroka.techut.plane.domain.Pilot;
 import pl.msoroka.techut.plane.domain.Plane;
 import pl.msoroka.techut.plane.domain.Producer;
 
@@ -110,5 +112,23 @@ public class AirlinesManagerHibernateImpl implements AirlinesManager {
         Plane plane = findPlaneById(planeId);
 
         producer.getPlanes().add(plane);
+    }
+
+    @Override
+    public void assignLicense(long licenseId, long pilotId){
+        License license = (License) hsf.getCurrentSession().get(License.class, licenseId);
+        Pilot pilot = (Pilot) hsf.getCurrentSession().get(Pilot.class, pilotId);
+
+        pilot.setLicense(license);
+    }
+
+    @Override
+    public void addPilot(Pilot pilot) {
+        hsf.getCurrentSession().save(pilot);
+    }
+
+    @Override
+    public void addLicense(License license) {
+        hsf.getCurrentSession().save(license);
     }
 }

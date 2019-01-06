@@ -8,6 +8,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
+import pl.msoroka.techut.plane.domain.License;
+import pl.msoroka.techut.plane.domain.Pilot;
 import pl.msoroka.techut.plane.domain.Plane;
 import pl.msoroka.techut.plane.domain.Producer;
 
@@ -54,4 +56,16 @@ public class AirlinesTest {
         assertEquals(plane2.getSideNumber(), producedPlanesAfter.get(after-1).getSideNumber());
     }
 
+    @Test
+    public void assignLicenseTest(){
+        Pilot pilot = new Pilot("Dawid", "Nowak", new Date(115,05,15));
+        airlinesManager.addPilot(pilot);
+
+        License license = new License(pilot.getFirstName() + "123" + pilot.getId());
+        airlinesManager.addLicense(license);
+
+        airlinesManager.assignLicense(license.getId(), pilot.getId());
+
+        assertEquals(pilot.getLicense().getId(), license.getId());
+    }
 }
