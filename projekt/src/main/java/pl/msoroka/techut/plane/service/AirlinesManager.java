@@ -34,7 +34,9 @@ public interface AirlinesManager {
 
     //Relations
     List<Plane> getProducedPlanes(Producer producer);
+    List<Pilot> getPlanePilots(Plane plane);
     void producePlane(long producerId, long planeId);
     void assignLicense(long licenseId, long pilotId);
+    void relatePilotAndPlane(long pilotId, long planeId);
 
 }

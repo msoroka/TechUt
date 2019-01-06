@@ -107,6 +107,15 @@ public class AirlinesManagerHibernateImpl implements AirlinesManager {
     }
 
     @Override
+    public List<Pilot> getPlanePilots(Plane plane){
+        plane = (Plane) hsf.getCurrentSession().get(Plane.class, plane.getId());
+
+        List<Pilot> pilots = new ArrayList<Pilot>(plane.getPilots());
+
+        return pilots;
+    }
+
+    @Override
     public void producePlane(long producerId, long planeId){
         Producer producer = findProducerById(producerId);
         Plane plane = findPlaneById(planeId);
@@ -120,6 +129,14 @@ public class AirlinesManagerHibernateImpl implements AirlinesManager {
         Pilot pilot = (Pilot) hsf.getCurrentSession().get(Pilot.class, pilotId);
 
         pilot.setLicense(license);
+    }
+
+    @Override
+    public void relatePilotAndPlane(long pilotId, long planeId){
+        Pilot pilot = (Pilot) hsf.getCurrentSession().get(Pilot.class, pilotId);
+        Plane plane = findPlaneById(planeId);
+
+        plane.getPilots().add(pilot);
     }
 
     @Override

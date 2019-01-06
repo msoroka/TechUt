@@ -39,8 +39,8 @@ public class AirlinesTest {
         List<Plane> producedPlanesBefore = airlinesManager.getProducedPlanes(producer);
         int before = producedPlanesBefore.size();
 
-        Plane plane1 = new Plane("777", "XX-777", 250, new Date(115, 05, 15));
-        Plane plane2 = new Plane("747", "XX-747", 250, new Date(115, 05, 15));
+        Plane plane1 = new Plane("777", "XX-777" + before + 1, 250, new Date(115, 05, 15));
+        Plane plane2 = new Plane("747", "XX-747" + before + 2, 250, new Date(115, 05, 15));
 
         airlinesManager.addPlane(plane1);
         airlinesManager.addPlane(plane2);
@@ -67,5 +67,43 @@ public class AirlinesTest {
         airlinesManager.assignLicense(license.getId(), pilot.getId());
 
         assertEquals(pilot.getLicense().getId(), license.getId());
+    }
+
+    @Test
+    public void relatePilotAndPlaneCheck(){
+        Pilot pilot1 = new Pilot("Adam", "Małysz", new Date(115,05,15));
+        Pilot pilot2 = new Pilot("Dawid", "Kubacki", new Date(115,05,15));
+
+        airlinesManager.addPilot(pilot1);
+        airlinesManager.addPilot(pilot2);
+
+
+        Plane plane1 = new Plane("777", "XX-777" + pilot1.getId() + 10, 250, new Date(115, 05, 15));
+        Plane plane2 = new Plane("747", "XX-747" + pilot2.getId() + 20, 250, new Date(115, 05, 15));
+
+        airlinesManager.addPlane(plane1);
+        airlinesManager.addPlane(plane2);
+
+        List<Pilot> pilotsOneBefore = airlinesManager.getPlanePilots(plane1);
+        List<Pilot> pilotsTwoBefore = airlinesManager.getPlanePilots(plane2);
+        int beforeOne = pilotsOneBefore.size();
+        int beforeTwo = pilotsTwoBefore.size();
+
+        airlinesManager.relatePilotAndPlane(pilot1.getId(), plane1.getId());
+        airlinesManager.relatePilotAndPlane(pilot1.getId(), plane2.getId());
+        airlinesManager.relatePilotAndPlane(pilot2.getId(), plane1.getId());
+        airlinesManager.relatePilotAndPlane(pilot2.getId(), plane2.getId());
+
+        List<Pilot> pilotsOneAfter = airlinesManager.getPlanePilots(plane1);
+        List<Pilot> pilotsTwoAfter = airlinesManager.getPlanePilots(plane2);
+        int afterOne = pilotsOneAfter.size();
+        int afterTwo = pilotsTwoAfter.size();
+
+        assertEquals(beforeOne + 2, afterOne);
+        assertEquals(beforeTwo + 2, afterTwo);
+        assertEquals(plane1.getPilots().get(afterOne-2).getFirstName(), pilot1.getFirstName());
+        assertEquals(plane1.getPilots().get(afterOne-1).getFirstName(), pilot2.getFirstName());
+        assertEquals(plane2.getPilots().get(afterTwo-2).getFirstName(), pilot1.getFirstName());
+        assertEquals(plane2.getPilots().get(afterTwo-1).getFirstName(), pilot2.getFirstName());
     }
 }
