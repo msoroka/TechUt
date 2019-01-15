@@ -148,4 +148,9 @@ public class AirlinesManagerHibernateImpl implements AirlinesManager {
     public void addLicense(License license) {
         hsf.getCurrentSession().save(license);
     }
+
+    @Override
+    public Pilot findPilotByLicenseNumber(String licenseNumber){
+        return (Pilot) hsf.getCurrentSession().getNamedQuery("pilot.byLicenseNumber").setString("licenseNumber", licenseNumber).uniqueResult();
+    }
 }

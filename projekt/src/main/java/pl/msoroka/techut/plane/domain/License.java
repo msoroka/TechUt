@@ -2,6 +2,7 @@ package pl.msoroka.techut.plane.domain;
 
 import javax.persistence.*;
 
+
 @Entity
 public class License {
 

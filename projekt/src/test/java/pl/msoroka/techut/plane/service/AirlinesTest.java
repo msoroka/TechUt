@@ -106,4 +106,19 @@ public class AirlinesTest {
         assertEquals(plane2.getPilots().get(afterTwo-2).getFirstName(), pilot1.getFirstName());
         assertEquals(plane2.getPilots().get(afterTwo-1).getFirstName(), pilot2.getFirstName());
     }
+
+    @Test
+    public void getPilotByLicenseNumberTest(){
+        Pilot pilot = new Pilot("Mateusz", "Antonowicz", new Date(115,05,15));
+        airlinesManager.addPilot(pilot);
+
+        License license = new License(pilot.getFirstName() + "123" + pilot.getId());
+        airlinesManager.addLicense(license);
+
+        airlinesManager.assignLicense(license.getId(), pilot.getId());
+
+        Pilot retrievedPilot = airlinesManager.findPilotByLicenseNumber(license.getLicenseNumber());
+
+        assertEquals(pilot.getId(), retrievedPilot.getId());
+    }
 }

@@ -28,6 +28,7 @@ public interface AirlinesManager {
 
     //Pilot
     void addPilot(Pilot pilot);
+    Pilot findPilotByLicenseNumber(String licenseNumber);
 
     //License
     void addLicense(License license);

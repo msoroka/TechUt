@@ -73,7 +73,7 @@ public class Plane {
         this.produceDate = produceDate;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public List<Pilot> getPilots() {
         return pilots;
     }

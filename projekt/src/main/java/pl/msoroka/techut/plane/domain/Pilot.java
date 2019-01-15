@@ -4,6 +4,9 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "pilot.byLicenseNumber", query = "SELECT p FROM Pilot p JOIN p.license l WHERE l.licenseNumber = :licenseNumber")
+})
 public class Pilot {
 
     private long id;
